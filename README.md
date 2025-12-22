@@ -18,3 +18,11 @@ The scenarios included reflect **realistic attack techniques and suspicious acti
 - [Excessive Resource Creation/Deletion] 
   
 Where applicable, investigations are mapped to **MITRE ATT&CK** techniques to provide additional context on adversary behaviour and to support threat-informed defence.
+
+---
+
+### Tools and Technologies
+
+- **Microsoft Sentinel (SIEM)**
+- **Microsoft Defender for Endpoint (MDE)**
+- **Kusto Query Language (KQL)**
