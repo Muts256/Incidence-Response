@@ -12,7 +12,7 @@ The investigations in this repository follow the **NIST Incident Response Lifecy
 Each investigation demonstrates how these phases are applied in practice, from initial alert triage through to analysis and response decision-making.
 
 The scenarios included reflect **realistic attack techniques and suspicious activity patterns**, such as:
-- Brute force authentication attempts  
+- [Brute Force Attempts Detection](https://github.com/Muts256/Incident-Response/blob/main/Brute-Force-Attempt-Detection.md) 
 - Suspicious PowerShell web requests  
 - Malicious or anomalous process execution  
 - Credential access and misuse  
