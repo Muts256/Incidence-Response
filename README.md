@@ -26,3 +26,20 @@ Where applicable, investigations are mapped to **MITRE ATT&CK** techniques to pr
 - **Microsoft Sentinel (SIEM)**
 - **Microsoft Defender for Endpoint (MDE)**
 - **Kusto Query Language (KQL)**
+
+## Detection Coverage (MITRE ATT&CK Aligned)
+
+As part of the **Detection and Analysis** phase of the  **NIST SP 800-61 Incident Response Lifecycle**, this is an example of how detections and investigations can be mapped to the **MITRE ATT&CK framework**.
+
+MITRE ATT&CK helps to:
+- Understand adversary behaviour
+- Validate detection coverage
+- Support alert triage and investigation
+- Identify detection gaps for continuous improvement
+
+| Tactic | Technique ID | Technique Name | Detection / Investigation |
+|------|-------------|---------------|---------------------------|
+| Credential Access | T1110 | Brute Force | Brute Force Sign-In Detection (Sentinel Scheduled Rule) |
+| Execution | T1059.001 | PowerShell | Suspicious PowerShell Web Request |
+| Credential Access | T1003 | OS Credential Dumping | Mimikatz Execution Investigation |
+| Command and Control | T1071.001 | Web Protocols | Suspicious Outbound HTTP Traffic |
