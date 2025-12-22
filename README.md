@@ -13,9 +13,8 @@ Each investigation demonstrates how these phases are applied in practice, from i
 
 The scenarios included reflect **realistic attack techniques and suspicious activity patterns**, such as:
 - [Brute Force Attempts Detection](https://github.com/Muts256/Incident-Response/blob/main/Brute-Force-Attempt-Detection.md) 
-- Suspicious PowerShell web requests  
-- Malicious or anomalous process execution  
-- Credential access and misuse  
-- Network-based indicators of compromise  
-
+- [Suspicious PowerShell web requests]  
+- [Potential Impossible Travel]  
+- [Excessive Resource Creation/Deletion] 
+  
 Where applicable, investigations are mapped to **MITRE ATT&CK** techniques to provide additional context on adversary behaviour and to support threat-informed defence.
