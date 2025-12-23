@@ -13,7 +13,7 @@ Each investigation demonstrates how these phases are applied in practice, from i
 
 The scenarios included reflect **realistic attack techniques and suspicious activity patterns**, such as:
 - [Brute Force Attempts Detection](https://github.com/Muts256/Incident-Response/blob/main/Brute-Force-Attempt-Detection.md) 
-- [Suspicious PowerShell web requests]  
+- [Suspicious PowerShell web requests](https://github.com/Muts256/Incident-Response/blob/main/Suspicious-PowerShell-web-requests.md)  
 - [Potential Impossible Travel]  
 - [Excessive Resource Creation/Deletion] 
   
