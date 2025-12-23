@@ -137,15 +137,18 @@ Isolate the device.
 
 Manualy start an Antivirus full scan to ensure that no malware was installed on the device.
 
-Ensure that the user accounts on the decive have their password changed and there could be need forthe device to be re-imaged malware was found on the device.
+Ensure that the user accounts on the device have their password changed, and there may be a need for the device to be re-imaged if malware was found on the device. In some case it does not matter; re-imagining ensures the device is clean
 
+The device can be removed from Isolation once all tests have been confirmed clean
 ---
 
 ## Post-Incident Activity Phase 
 
-The Post-Incident Activity phase focuses on capturing lessons learned and improving the organization’s ability to prevent and respond to similar incidents in the future. This includes documenting the incident timeline, investigation findings, actions taken, and final outcome to ensure accurate reporting and knowledge retention.
+The Post-Incident Activity phase focuses on capturing lessons learned and improving the organization’s ability to prevent and respond to similar incidents in the future. This includes documenting the incident timeline, investigation findings, actions taken, and outcome to ensure accurate reporting and knowledge retention.
 
-Following the incident, detection rules and analytics are reviewed and refined to improve visibility into suspicious PowerShell web requests, such as enhancing alerts for download cradles, encoded commands, or unusual outbound connections. Gaps identified in logging, monitoring, or response procedures are addressed, and playbooks are updated accordingly. Include findings of the scripts were downloaded in te report 
+An extra policy restricting PowerShell execution was implemented, and the user underwent user education on clicking links
+
+Following the incident, detection rules and analytics are reviewed and refined to improve visibility into suspicious PowerShell web requests, such as enhancing alerts for download cradles, encoded commands, or unusual outbound connections. Gaps identified in logging, monitoring, or response procedures are addressed, and playbooks are updated accordingly. Include the findings of the scripts that were downloaded in the report 
 
 This phase also supports continuous improvement by feeding insights back into security awareness, analyst training, and control implementation, ensuring that future PowerShell-based threats can be detected and handled more efficiently.
 
