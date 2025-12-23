@@ -152,10 +152,9 @@ Key activities include:
 - Preserving evidence to support forensic analysis
 - Escalating confirmed incidents according to incident response procedures
 
-The objective of this phase is to ensure incidents are accurately identified and
-sufficient context is gathered to enable effective containment and remediation
+The objective of this phase is to ensure incidents are accurately identified and sufficient context is gathered to enable effective containment and remediation
 
-In Sentinel, navigate to the Incident tab and select it. Search for the rule name created in the previous step. An incident will apperar if the rule was violated.
+In Sentinel, navigate to the Incident tab and select it. Search for the rule name created in the previous step. An incident will appear if the rule was violated.
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/2bdee97c08e8482a78020086ef3c927c0fa3d098/Images/Incident-Response/Brute-Force/In8.png)
 
@@ -169,11 +168,11 @@ The incident can now be assigned to an analyst for investigation and the status 
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/2bdee97c08e8482a78020086ef3c927c0fa3d098/Images/Incident-Response/Brute-Force/In11.png)
 
-Part of the investigation is to find out if any of the violitiong IP addresses was successful in its attempt to gain access to any of the systems. To get this navigation to Sentinel and run manual run the rule.
+Part of the investigation is to find out if any of the violating IP addresses was successful in it's attempt to gain access to any of the systems. To get this navigation to Sentinel and manual run the rule.
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/2bdee97c08e8482a78020086ef3c927c0fa3d098/Images/Incident-Response/Brute-Force/In11a.png)
 
-Create another query that will establish if any of the IP addesses gained access.
+Create another query that will establish/confirm if any of the IP addesses gained access.
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/2bdee97c08e8482a78020086ef3c927c0fa3d098/Images/Incident-Response/Brute-Force/In11b.png)
 
