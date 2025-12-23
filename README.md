@@ -25,6 +25,7 @@ Where applicable, investigations are mapped to **MITRE ATT&CK** techniques to pr
 
 - **Microsoft Sentinel (SIEM)**
 - **Microsoft Defender for Endpoint (MDE)**
+- **Virtual Machine (VM)**
 - **Kusto Query Language (KQL)**
 
 ### Topology
