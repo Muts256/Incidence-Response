@@ -6,6 +6,7 @@
 - [Detection and Analysis](#detection-and-analysis)
 - [Containment, Eradication, and Recovery Phase](#containment-eradication-and-recovery-phase)
 - [Post-Incident Activity Phase](#post-incident-activity-phase)
+- [MITRE ATT&CK Mapping](#mitre-attck-mapping)
 - [Lessons Learned](#lessons-learned)
 
 
@@ -38,17 +39,17 @@ The Preparation phase focuses on establishing the people, processes, and technic
 
 In this scenario, create a scheduled rule to detect suspicious PowerShell activity
 
-In Sentinel navigate to the Analytics in the Analytics workspace and select create a Scheduled rule.
+In Sentinel, navigate to the Analytics in the Analytics workspace and select create a Scheduled rule.
 
-On Create Scheduled rule wizard page give the rule a nmae and description.
+On the Create Scheduled rule wizard page, give the rule a nmae and description.
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/6893b76659cb75b04b50c372533b90496199f999/Images/Incident-Response/Suspicious-PowerShell-Web-Request/Sp20.png)
 
-For the MITRE ATT&CK, select the associated categories for example T1059 Command and Scripting Interpreter
+For the MITRE ATT&CK, select the associated categories, for example, T1059 Command and Scripting Interpreter
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/6893b76659cb75b04b50c372533b90496199f999/Images/Incident-Response/Suspicious-PowerShell-Web-Request/Sp2.png)
 
-Onthe Set rule logic page. Set the query that will be used to query the logs and delect the powershell script execution
+On the Set rule logic page. Set the query that will be used to query the logs and detect the PowerShell script execution
 
 ```
 let TargetHostname = "Inc-Response-VM"; 
@@ -65,7 +66,7 @@ Fill in the Alert enhancement fields with host devicename, Name AccountName and 
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/6893b76659cb75b04b50c372533b90496199f999/Images/Incident-Response/Suspicious-PowerShell-Web-Request/Sp4.png)
 
-For the Query Scheduling follow company policy. In this scenario run query every 4 hrs, lookup data form the last 24 hours
+For the Query Scheduling follow the company policy. In this scenario, run THE query every 4 hrs, lookup data from the last 24 hours
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/6893b76659cb75b04b50c372533b90496199f999/Images/Incident-Response/Suspicious-PowerShell-Web-Request/Sp5.png)
 
