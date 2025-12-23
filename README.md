@@ -27,6 +27,10 @@ Where applicable, investigations are mapped to **MITRE ATT&CK** techniques to pr
 - **Microsoft Defender for Endpoint (MDE)**
 - **Kusto Query Language (KQL)**
 
+### Topology
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/8b21c644685ec1719373c7a3eee3f2e10776058e/Images/Incident-Response/Brute-Force/In13.png)
+
 ## Detection Coverage (MITRE ATT&CK Aligned)
 
 As part of the **Detection and Analysis** phase of the  **NIST SP 800-61 Incident Response Lifecycle**, this is an example of how detections and investigations can be mapped to the **MITRE ATT&CK framework**.
