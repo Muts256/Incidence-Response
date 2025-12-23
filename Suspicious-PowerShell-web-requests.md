@@ -156,6 +156,17 @@ This phase also supports continuous improvement by feeding insights back into se
 
 ---
 
+## MITRE ATT&CK Mapping
+
+| Tactic                | Technique ID | Technique Name                    | Relevance to Scenario                                                                 |
+|-----------------------|--------------|-----------------------------------|---------------------------------------------------------------------------------------|
+| Execution             | T1059.001    | PowerShell                        | PowerShell scripts were executed on the device, indicating potential malicious command execution. |
+| Command and Control   | T1071.001    | Web Protocols                    | PowerShell was used to make outbound web requests to external destinations.            |
+| Command and Control   | T1105        | Ingress Tool Transfer            | Web requests may have been used to download additional scripts or payloads.            |
+| Defense Evasion       | T1027        | Obfuscated/Encrypted Files or Info | PowerShell commands may be encoded or obfuscated to evade detection.                  |
+| Discovery             | T1082        | System Information Discovery     | Executed scripts may collect host information prior to further actions.               |
+
+---
 ## Lessons Learned
 
 - Adequate preparation, including enhanced PowerShell logging and endpoint visibility, is essential for detecting suspicious PowerShell web requests at an early stage.
