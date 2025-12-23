@@ -117,6 +117,8 @@ The query reveals that the scripts were downloaded and exceuted on the device.
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/6893b76659cb75b04b50c372533b90496199f999/Images/Incident-Response/Suspicious-PowerShell-Web-Request/Sp12.png).
 
+[Back to the Top](#table-of-contents)
+
 ---
 
 ## Containment, Eradication, and Recovery Phase
@@ -144,6 +146,8 @@ The Post-Incident Activity phase focuses on capturing lessons learned and improv
 Following the incident, detection rules and analytics are reviewed and refined to improve visibility into suspicious PowerShell web requests, such as enhancing alerts for download cradles, encoded commands, or unusual outbound connections. Gaps identified in logging, monitoring, or response procedures are addressed, and playbooks are updated accordingly. Include findings of the scripts were downloaded in te report 
 
 This phase also supports continuous improvement by feeding insights back into security awareness, analyst training, and control implementation, ensuring that future PowerShell-based threats can be detected and handled more efficiently.
+
+[Back to the Top](#table-of-contents)
 
 ---
 
