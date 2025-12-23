@@ -4,10 +4,10 @@ This repository documents **practical Incident Response investigations** focused
 
 The investigations in this repository follow the **NIST Incident Response Lifecycle**, ensuring a structured and repeatable approach to handling security incidents:
 
-- **Preparation** – establishing visibility, logging, and readiness to detect malicious activity  
-- **Detection and Analysis** – identifying suspicious behaviour, validating alerts, and determining incident scope and impact  
-- **Containment, Eradication, and Recovery** – considering actions to limit impact, remove the threat, and restore affected systems safely  
-- **Post-Incident Activity** – documenting findings, lessons learned, and opportunities for improvement  
+- **Preparation:** Establishing visibility, logging, and readiness to detect malicious activity  
+- **Detection and Analysis:** Identifying suspicious behaviour, validating alerts, and determining incident scope and impact  
+- **Containment, Eradication, and Recovery:** Considering actions to limit impact, remove the threat, and restore affected systems safely  
+- **Post-Incident Activity:** Documenting findings, lessons learned, and opportunities for improvement  
 
 Each investigation demonstrates how these phases are applied in practice, from initial alert triage through to analysis and response decision-making.
 
