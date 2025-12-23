@@ -73,6 +73,8 @@ Create the rule.
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/6893b76659cb75b04b50c372533b90496199f999/Images/Incident-Response/Suspicious-PowerShell-Web-Request/Sp6.png)
 
+[Back to the Top](#table-of-contents)
+
 ---
 
 ## Detection and Analysis
