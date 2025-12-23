@@ -258,3 +258,5 @@ After the review, recomendations applied, improvements made the incident can be 
 - Alerting on failed logon thresholds is effective for detection; however, implementing preventative controls such as multi-factor authentication and account lockout policies would further reduce brute force risk.  
 - Restricting RDP access at the network layer using NSG rules proved to be an effective containment measure and should be enforced proactively.  
 - Post-incident monitoring and validation of scheduled analytics rules confirmed the effectiveness of remediation and that no further malicious activity occurred.
+
+[Back to Top](#table-of-contents)
