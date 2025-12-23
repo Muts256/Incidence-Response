@@ -35,6 +35,8 @@ Such attempts are often characterised by a **high volume of failed authenticatio
 
 *(In ICS / OT environments, this activity maps to **T0806  Brute Force** under MITRE ATT&CK for ICS.)*
 
+[Back to Top](#table-of-contents)
+
 ---
 
 ## Stage of the Attack
@@ -69,6 +71,8 @@ Commonly referred to in practice as the **“NIST Incident Response Lifecycle”
 2. **Detection and Analysis**
 3. **Containment, Eradication, and Recovery**
 4. **Post-Incident Activity**
+
+[Back to Top](#table-of-contents)
 
 ---
 ### 1. Preparation
@@ -128,6 +132,8 @@ In the Query scheduling section, fill in how often the query will be executed, s
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/2bdee97c08e8482a78020086ef3c927c0fa3d098/Images/Incident-Response/Brute-Force/In7a.png)
 
+[Back to Top](#table-of-contents)
+
 ---
 
 ### 2. Detection & Analysis
@@ -180,6 +186,8 @@ DeviceLogonEvents
 ```
 In this case none of the IP addresses was successful.
 
+[Back to Top](#table-of-contents)
+
 ---
 
 ### 3. Containment, Eradication, and Recovery
@@ -223,6 +231,7 @@ The objective of this phase is to fully eliminate the threat while ensuring busi
 
 It is important to ensure that the threat has been remediated before moving forward. This means monitoring the affected devices and letting the scheduled rule run automatically. If remediation was successful no detections should be found.
 
+[Back to Top](#table-of-contents)
 
 ---
 
