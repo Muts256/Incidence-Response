@@ -229,3 +229,5 @@ This lab highlighted several key lessons related to identity-based incident dete
   exclusions must be reviewed regularly to avoid noise or blind spots.
 - **Playbooks improve response:** Predefined response actions reduced time to
   containment and ensured consistent handling of incidents.
+
+[Back to the Top](#table-of-contents)
