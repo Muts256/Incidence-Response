@@ -213,7 +213,9 @@ The objective of this phase is continuous improvement, reducing the likelihood a
 
 Ensure to document all the steps taken. Put the notes into the activity log of the incident, and close the incident
 
-### Lessons Learned
+---
+
+## Lessons Learned
 
 This lab highlighted several key lessons related to identity-based incident detection and response:
 
