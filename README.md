@@ -30,9 +30,13 @@ Where applicable, investigations are mapped to **MITRE ATT&CK** techniques to pr
 - **Virtual Machine (VM)**
 - **Kusto Query Language (KQL)**
 
+---
+
 ### Topology
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/8b21c644685ec1719373c7a3eee3f2e10776058e/Images/Incident-Response/Brute-Force/In13.png)
+
+---
 
 ## Detection Coverage (MITRE ATT&CK Aligned)
 
