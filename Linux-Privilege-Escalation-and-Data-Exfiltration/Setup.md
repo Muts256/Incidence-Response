@@ -118,3 +118,6 @@ Check that the file has been uploaded
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/3009a58f976362d05cee7e8af830c66346501e7b/Images/Linux-Privilege-Escalation/Pr9.png)
 
+
+
+[Continue to the Investigation](https://github.com/Muts256/Incident-Response/blob/main/Linux-Privilege-Escalation-and-Data-Exfiltration/Investigation.md)
