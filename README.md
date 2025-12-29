@@ -18,7 +18,8 @@ The scenarios included reflect **realistic attack techniques and suspicious acti
 | [Suspicious PowerShell Web Requests](https://github.com/Muts256/Incident-Response/blob/main/Suspicious-PowerShell-web-requests.md) | Investigation of PowerShell activity making suspicious outbound web requests. |
 | [Potential Impossible Travel](https://github.com/Muts256/Incident-Response/blob/main/Potential-Impossible-Travel.md) | Analysis of sign-ins from geographically distant locations within an infeasible timeframe. |
 | [Excessive Resource Creation/Deletion](https://github.com/Muts256/Incident-Response/blob/main/Excessive-Resource-Creation-And-Or-Deletion.md) | Detection of abnormal cloud resource creation or deletion activity that may indicate compromise.
-  
+ | [Linux Privilege Escalation and Data Exfiltration](https://github.com/Muts256/Incident-Response/tree/main/Linux-Privilege-Escalation-and-Data-Exfiltration) | Incident Response of suspected insider threat.  | 
+
 Where applicable, investigations are mapped to **MITRE ATT&CK** techniques to provide additional context on adversary behaviour and to support threat-informed defence.
 
 ---
