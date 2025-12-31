@@ -1,6 +1,6 @@
 ## Introduction
 
-This repository documents **practical Incident Response investigations** focused on detecting, analysing, and responding to real-world security threats commonly observed in enterprise and SOC environments.
+This repository documents **practical Incident Response investigations** focused on detecting, analysing, and responding to real world security threats commonly observed in enterprise and SOC environments.
 
 The investigations in this repository follow the **NIST Incident Response Lifecycle**, ensuring a structured and repeatable approach to handling security incidents:
 
