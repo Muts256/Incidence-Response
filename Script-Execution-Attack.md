@@ -1,3 +1,17 @@
+## Table of Contents
+
+- [Scenario](#scenario)
+- [Technology](#technology)
+- [Prerequisites](#prerequisites)
+- [NIST SP 800-61 Incident Response Lifecycle](#nist-sp-800-61-incident-response-lifecycle)
+  - [The Attack](#the-attack)
+  - [Preparation](#preparation)
+  - [Detection and Analysis](#detection-and-analysis)
+  - [Containment, Eradication, and Recovery](#containment-eradication-and-recovery)
+  - [Post-Incident Activity](#post-incident-activity)
+- [Lessons Learned](#lessons-learned)
+
+
 ### Scenario
 
 “Script execution attacks” occur when a bad actor infects your endpoint with malware that uses a “script interpreter” (in this case, AutoIt.exe) to automatically launch malicious programs within the target machine, silently. This typically happens when you download this malware from a website or click a malicious link.
@@ -11,7 +25,7 @@ This lab involves creating MDE detection rules to detect the attack, setting up 
   - AtomicRedTeam Scripts
   - Git
 
-### Setup /Prerequisites
+### Prerequisites
 
 Spin up a VM, disable the firewall, and the Network Security Group (NSG) to allow download of the scripts. 
 
@@ -29,11 +43,70 @@ Ensure the setting for adjusting your environment path is at Git from the comman
 
 ![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At13.png)
 
-## NIST SP 800-61 Incident Response Lifecycle
+### NIST SP 800-61 Incident Response Lifecycle
 1. **Preparation**
 2. **Detection & Analysis**
 3. **Containment, Eradication, & Recovery**
 4. **Post-Incident Activity**
+
+*NB: Configure the detection rules before executing the attack*
+
+---
+
+### The Attack
+
+Execute the following commands one after the other 
+
+1. This command downloads the Atomic Red Team repository from GitHub to your local system.
+```
+git clone https://github.com/redcanaryco/atomic-red-team.git
+```
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At1.png)
+
+2. Ensure you are in the directory where atomic-red-team is downloaded
+   
+```
+cd C:\Users\labuser1\atomic-red-team
+```
+
+3. This sets the environment variable and points it to the atomic script from the correct folder (Atomics)
+```
+$env:PathToAtomicsFolder = "C:\Users\labuser1\atomic-red-team\atomics\"
+```
+
+4. Installs a PowerShell module and allows the module to overwrite existing commands with the same names from other modules.
+```
+Install-Module -Name Invoke-AtomicRedTeam -Force -AllowClobber
+```
+![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At2.png)
+
+5. This command loads the Invoke-AtomicRedTeam module
+```
+Import-Module Invoke-AtomicRedTeam
+```
+6. This command temporarily disables script execution restrictions for the current PowerShell session only, allowing scripts to run without being blocked.
+
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force
+```
+7. The command prepares the system to run Atomic Red Team tests for MITRE ATT&CK technique T1059 (Command and Scripting Interpreter) by downloading or installing any required prerequisites.
+```
+Invoke-AtomicTest T1059 -GetPrereqs -PathToAtomicsFolder "C:\Users\labuser1\atomic-red-team\atomics\"
+```
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At4.png)
+
+8. The command executes Atomic Red Team adversary simulation tests for MITRE ATT&CK technique T1059 (Command and Scripting Interpreter).
+
+```
+Invoke-AtomicTest T1059 -PathToAtomicsFolder "C:\Users\labuser1\atomic-red-team\atomics\"
+````
+![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At5.png)
+
+If and when the calculator app is launched, the script was successfully executed
+
+![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At6.png)
 
 ---
 
@@ -164,63 +237,6 @@ Create Detection rules in MDE
 
 ---
 
-## The Attack
-
-Execute the following commands one after the other 
-
-1. This command downloads the Atomic Red Team repository from GitHub to your local system.
-```
-git clone https://github.com/redcanaryco/atomic-red-team.git
-```
-
-![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At1.png)
-
-2. Ensure you are in the directory where atomic-red-team is downloaded
-   
-```
-cd C:\Users\labuser1\atomic-red-team
-```
-
-3. This sets the environment variable and points it to the atomic script from the correct folder (Atomics)
-```
-$env:PathToAtomicsFolder = "C:\Users\labuser1\atomic-red-team\atomics\"
-```
-
-4. Installs a PowerShell module and allows the module to overwrite existing commands with the same names from other modules.
-```
-Install-Module -Name Invoke-AtomicRedTeam -Force -AllowClobber
-```
-![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At2.png)
-
-5. This command loads the Invoke-AtomicRedTeam module
-```
-Import-Module Invoke-AtomicRedTeam
-```
-6. This command temporarily disables script execution restrictions for the current PowerShell session only, allowing scripts to run without being blocked.
-
-```
-Set-ExecutionPolicy Bypass -Scope Process -Force
-```
-7. The command prepares the system to run Atomic Red Team tests for MITRE ATT&CK technique T1059 (Command and Scripting Interpreter) by downloading or installing any required prerequisites.
-```
-Invoke-AtomicTest T1059 -GetPrereqs -PathToAtomicsFolder "C:\Users\labuser1\atomic-red-team\atomics\"
-```
-
-![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At4.png)
-
-8. The command executes Atomic Red Team adversary simulation tests for MITRE ATT&CK technique T1059 (Command and Scripting Interpreter).
-
-```
-Invoke-AtomicTest T1059 -PathToAtomicsFolder "C:\Users\labuser1\atomic-red-team\atomics\"
-````
-![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At5.png)
-
-If and when the calculator app is launched, the script was successfully executed
-
-![image alt](https://github.com/Muts256/SNC-Public/blob/c7aedabd3a0bcbeb395401acd2f0bb9b8e11c80b/Images/Atomic-Red-Team/At6.png)
-
----
-
 ### Detection and Analysis
 
 The Detection & Analysis phase is the critical "trigger point" of the NIST Incident Response lifecycle. It focuses on the shift from normal operations to active incident management, where a potential security event is identified, validated, and assessed.
@@ -280,7 +296,7 @@ Query 4
 
 
 
-Check remote connection
+Check if there was any remote connection
 
 ```
 DeviceNetworkEvents
@@ -307,7 +323,7 @@ There was connection according to the logs.
 
 ---
 
-### Containment, Eradication, and Recovery Phase
+### Containment, Eradication, and Recovery 
 
 #### 1. Containment
 
@@ -354,7 +370,7 @@ Antivirus scan was started
 
 ---
 
-### Post-Incident Activity Phase
+### Post-Incident Activity 
 
 Objective
 Analyze the incident response effort, capture lessons learned, and improve the organization’s security posture to prevent similar incidents in the future.
