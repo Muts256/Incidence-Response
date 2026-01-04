@@ -305,6 +305,8 @@ This query is useful for detecting:
 
 There was connection according to the logs.
 
+---
+
 ### Containment, Eradication, and Recovery Phase
 
 #### 1. Containment
@@ -349,3 +351,55 @@ Antivirus scan was started
 - Gradually reconnect systems to the production network.
 
 **Goal:** Resume normal business operations without reintroducing the threat.
+
+---
+
+### Post-Incident Activity Phase
+
+Objective
+Analyze the incident response effort, capture lessons learned, and improve the organization’s security posture to prevent similar incidents in the future.
+
+
+#### Key Activities
+
+#### Lessons Learned Review
+- Conduct post-incident meetings with all relevant stakeholders.
+- Identify what worked well and what did not during detection, analysis, and response.
+
+Two detection rules did not trigger; during this phase, the rules are reviewed to determine why they failed and are fine-tuned to ensure they function as intended.
+
+#### Root Cause Analysis
+- Determine how the incident occurred.
+- Identify gaps in controls, monitoring, or procedures.
+
+#### Documentation and Reporting
+- Finalize incident reports and timelines.
+- Document indicators of compromise (IOCs), tactics, techniques, and procedures (TTPs).
+
+#### Improve Security Controls
+- Update detection rules and alerting logic.
+- Enhance logging, monitoring, and visibility.
+- Strengthen access controls and authentication mechanisms.
+
+#### Policy and Procedure Updates
+- Update incident response playbooks and escalation procedures.
+- Refine vulnerability management and patching processes.
+
+#### Training and Awareness
+- Provide targeted training based on findings.
+- Improve user awareness to reduce human-related risks.
+
+
+#### Goal
+
+Reduce the likelihood and impact of future incidents by continuously improving the incident response capability.
+
+
+### Lessons Learned
+
+- Detection rules may not always trigger as expected, highlighting the need for continuous validation and tuning.
+- High-fidelity detections require contextual correlation across process, file, network, and logon telemetry.
+- Living-off-the-land tools (e.g., PowerShell, Bash, AutoIt, Azure CLI) can be abused and may evade static detections.
+- Insider threat activity can closely resemble legitimate user behavior, emphasizing the importance of least privilege and user behavior monitoring.
+- Mapping detections to MITRE ATT&CK helps identify coverage gaps and improves investigation clarity.
+- Adversary simulation using Atomic Red Team is effective for validating SOC detection readiness.
