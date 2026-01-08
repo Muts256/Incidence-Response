@@ -194,7 +194,7 @@ In this case none of the IP addresses was successful.
 The **Containment, Eradication, and Recovery** phase focuses on limiting the impact of a confirmed incident, removing the threat, and restoring systems to
 normal operation.
 
-**#Containment** activities include:
+**Containment** activities include:
 - Isolating affected hosts or segments
 - Disabling compromised user or service accounts
 - Blocking malicious IPs, domains, or indicators
@@ -208,7 +208,7 @@ This action is taken to contain ie stop the spread of the threat. User accounts 
 
 To block the IP addresses. a firewall rule can be configured specifing the addresses to block. In Azure, a rule in the Network Security Group (NSG) can be created specifing the IP address that are allowed to RDP into the device.
 
-**#Eradication** activities include:
+**Eradication** activities include:
 - Removing malware or malicious artefacts
 - Closing exploited vulnerabilities
 - Applying security patches and configuration fixes
